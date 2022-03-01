@@ -112,20 +112,34 @@ PlayGame(choice2)
 
 ```{r tidy=TRUE}
 # (a). Make a construction function that allows the user to create a `door` object.
-#       INCOMPLETE.
+new_door <- function(choiceOfDoor){
+  output <- choiceOfDoor
+  class(output) <- "door"
+  return(output)
+}
 
-# (b). Make a validation function that checks whether the value in `door` is actually an integer.
+#=as.numeric(sample(x = 1:3, size = 1))
+
+
+# (bi). Make a validation function that checks whether the value in `door` is actually an integer.
 validate_door <- function(x){
   if(x%%1 != 0){
     stop("ERROR: this object does not contain an integer value!")
   }
+  if(x < 1 | x > 3){
+    stop("ERROR: this object does not contain the integers 1, 2, or 3!")
+  }
   return(x)
 }
 
-# (c). check that the validation function works for `door` objects that contain elements with integer and numeric classes:
+# (bii). Check that the validation function works for `door` objects that contain elements with integer and numeric classes:
 newObj <- validate_door(choice1)
+newObj
 newObj <- validate_door(choice2)
+newObj
 # Both work (i.e., neither throws an error).
+
+# (c). Include these changes into the 
 ```
 
 
