@@ -111,22 +111,32 @@ PlayGame(choice2)
   \end{itemize}
 
 ```{r tidy=TRUE}
-# (a). Make a construction function that allows the user to create a `door` object.
-new_door <- function(choiceOfDoor){
-  output <- choiceOfDoor
-  class(output) <- "door"
-  return(output)
+# (ai). Make a construction function that allows the user to create a `door` object.
+new_door <- function(choiceOfDoor=as.numeric(sample(x = 1:3, size = 1))){
+  x <- choiceOfDoor
+  class(x) <- "door"
+  return(x)
 }
+# note that the default value of choiceOfDoor is a random sample of the integers 1, 2, & 3. We can think of this as the game contestant randomly choosing between each door.
 
-#=as.numeric(sample(x = 1:3, size = 1))
+# (aii). Check that the construction function works for `choiceOfDoor inputs:
+test1 <- new_door(2) 
+test1  # Interpretation: the game contestant chooses door 2.
+test2 <- new_door() 
+test2  # Interpretation: the game contestant randomly chose between the three doors.
+
+# Crucially, note that this constructor does not include validation checks: We can use nonsensical numbers. This is because its the validation function, not the construction function, that should check the validity of these values:
+test3 <- new_door(5)
+test3  # No sensible interpretation. Will be caught by the validity check.
 
 
 # (bi). Make a validation function that checks whether the value in `door` is actually an integer.
 validate_door <- function(x){
-  if(x%%1 != 0){
-    stop("ERROR: this object does not contain an integer value!")
-  }
-  if(x < 1 | x > 3){
+  if (is.numeric(x[1]) == FALSE) {
+    stop("ERROR: this object does not contain a numeric value!")
+  } else if (x%%1 != 0){
+    stop("ERROR: this object does not contain the integers 1, 2, or 3!")
+  } else if (x < 1 | x > 3){
     stop("ERROR: this object does not contain the integers 1, 2, or 3!")
   }
   return(x)
@@ -139,8 +149,33 @@ newObj <- validate_door(choice2)
 newObj
 # Both work (i.e., neither throws an error).
 
-# (c). Include these changes into the 
+# (ci). Include the validation function in the original function.
+PlayGame.door <- function(x){
+  x <- validate_door(x)
+  winningDoor <- as.numeric(sample(x = 1:3, size = 1))
+  if (x == winningDoor) {
+    print("Congratulations! You are the owner of a BRAND. NEW. CAR!")
+  } else if (x != winningDoor) {
+    print("How unfortunate, you got the goat. Our condolences :(")
+  }
+}
+
+# (cii). Use the constructor function to create valid & non-valid test objects. Then use these to test the new function that includes the validation function.
+validObj1 <- new_door(1)
+validObj2 <- new_door(3L)
+validObj3 <- new_door()
+invalidObj1 <- new_door(-5)
+invalidObj2 <- new_door(1.5)
+invalidObj3 <- new_door("Seashells")
+
+PlayGame(validObj1) # Works properly.
+PlayGame(validObj2) # Works properly.
+PlayGame(validObj3) # Works properly.
+# PlayGame(invalidObj1) # Throws correct error.
+# PlayGame(invalidObj2) # Throws correct error.
+# PlayGame(invalidObj3) # Throws correct error.
 ```
+FINISHED
 
 
 
