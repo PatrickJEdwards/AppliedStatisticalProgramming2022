@@ -1,5 +1,6 @@
 ---
 title: "Applied Statistical Programming - Spring 2022"
+author: Patrick Edwards
 output: pdf_document
 ---
 
@@ -43,6 +44,89 @@ For this problem set, you will not solve the Monty Hall Problem, but you will ha
   \end{itemize}
 \end{enumerate}
 
+
+ANSWERS:
+
+**Problem 1**: Define a new class: \texttt{door}. Objects of this class simply take on one numeric value: 1, 2, or 3 -- indicating which door a candidate chooses.
+
 ```{r tidy=TRUE}
-# Code
+# (a). I create a list `choice` that consists of three objects 1, 2, & 3. I then assign the class `door` to this list. Crucially, this must work with elements that are integer and numeric. I create two objects with whole number elements of both integer and numeric classes.
+choice1 <- 1
+choice2 <- as.integer(1)
+class(choice1) <- "door"
+class(choice2) <- "door"
+
+# (b). This object now has the class attribute `door`.
+class(choice1)
+class(choice2)
+choice1
+choice2
+
+# COMPLETED.
 ```
+
+
+
+**Problem 2**: Create a method for \texttt{door} objects that is called \texttt{PlayGame}. This method is supposed to do the following:
+\begin{itemize}
+  \item take the numeric value that is stored in the \texttt{door} object,
+  \item draw a random number between 1 and 3 that presents the door behind which the car is hidden,
+  \item compare the two numbers, and print a message congratulating a winning candidate that chose the correct door, or expressing sympathies for a losing candidate that chose the wrong door.
+\end{itemize}
+
+```{r tidy=TRUE}
+# (a). I create the method.
+PlayGame <- function(x){
+  UseMethod("PlayGame")
+}
+
+PlayGame.door <- function(x){
+  winningDoor <- as.numeric(sample(x = 1:3, size = 1))
+  if(x == winningDoor) {
+    print("Congratulations! You are the owner of a BRAND. NEW. CAR!")
+  }
+  if(x != winningDoor) {
+    print("How unfortunate, you got the goat. Our condolences :(")
+  }
+}
+
+# (b). Check that this function works for `door` objects:
+PlayGame(choice1)
+PlayGame(choice2)
+
+# (c). Check that this function does not work for non-`door` objects:
+# PlayGame(unclass(choice))
+# Error in UseMethod("PlayGame") : 
+#   no applicable method for 'PlayGame' applied to an object of class "c('double', 'numeric')"
+
+# COMPLETED.
+```
+
+
+
+**Problem 3**: Write: 
+  \begin{itemize}
+    \item a construction function that allows the user to create a \texttt{door} object,
+    \item and a validation function that checks whether the value stored in \texttt{door} is actually an integer
+  \end{itemize}
+
+```{r tidy=TRUE}
+# (a). Make a construction function that allows the user to create a `door` object.
+#       INCOMPLETE.
+
+# (b). Make a validation function that checks whether the value in `door` is actually an integer.
+validate_door <- function(x){
+  if(x%%1 != 0){
+    stop("ERROR: this object does not contain an integer value!")
+  }
+  return(x)
+}
+
+# (c). check that the validation function works for `door` objects that contain elements with integer and numeric classes:
+newObj <- validate_door(choice1)
+newObj <- validate_door(choice2)
+# Both work (i.e., neither throws an error).
+```
+
+
+
