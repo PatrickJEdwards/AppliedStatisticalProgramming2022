@@ -142,12 +142,22 @@ validate_door <- function(x){
   return(x)
 }
 
+# PLEASE NOTE: Because this validation function uses the broader class 'numeric', it works for elements of class 'integer' AND elements of class 'double' which are also integers. I didn't want to arbitrarily limit future users to objects containing 'integer' class elements when 'double' class elements which are also integers work just as well.
+
 # (bii). Check that the validation function works for `door` objects that contain elements with integer and numeric classes:
 newObj <- validate_door(choice1)
 newObj
 newObj <- validate_door(choice2)
 newObj
-# Both work (i.e., neither throws an error).
+
+# (bii). Check that the validation function works for non-integer classes.
+choice3 <- "testing one two three"
+choice4 <- as.factor(1)
+# newObj <- validate_door(choice3)
+# newObj <- validate_door(choice4)
+
+# Both `door` objects work (i.e., neither throws an error). 
+# Both non-`door` objects do not work (i.e., both throw errors).
 
 # (ci). Include the validation function in the original function.
 PlayGame.door <- function(x){
