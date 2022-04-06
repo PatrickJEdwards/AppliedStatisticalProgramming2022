@@ -1,11 +1,14 @@
 ---
 title: "Applied Statistical Programming - Spring 2022"
 output: pdf_document
+author: "Patrick Edwards"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+
 
 \begin{center}
 {\Large{\textbf{Problem Set 5}}} \\
@@ -70,22 +73,45 @@ If we imagine carrying on that calculation many times between different points a
 
 \section*{Create an S4 Package}
 \begin{enumerate}
-\item To prepare for your midterm, you will use \texttt{devtools} to create an S4 R package named \texttt{integrateIt}.
+\item To prepare for your midterm, you will use \texttt{devtools} to create an S4 R package named \texttt{integrateIt}. 
+
+Finished: I set up package using code in `integrateItDevelopmentFile.R`.
 
 \item The package should include appropriate functions and appropriate documentation. For example, your package documentation needs to provide example usage that verifies basic functionality.
 
+[**UNFINISHED**!!]
+
 \item The package should have two classes: \texttt{Trapezoid} and \texttt{Simpson}
+
+[**UNFINISHED**!!]
 
 \item The package should have one generic: \texttt{integrateIt}
 
+[**UNFINISHED**!!]
+
 \item The package should contain at least two methods: \texttt{integrateIt}, \texttt{print}, and an optional extra credit method \texttt{tolTest}
+
+[**UNFINISHED**!!]
+
 \begin{enumerate}
 \item \texttt{integrateIt} method 
 \begin{enumerate}
 \item Takes four arguments: a vector of values $(x)$, a vector of evaluated values $(f(x)=y)$, starting/ending values $(a,b)$, and a \textit{Rule} argument that can be either "Trapezoid" or "Simpson".
+
+[**UNFINISHED**!!]
+
 \item Have three outputs: an object of class \texttt{Trapezoid} or class \texttt{Simpson}, the values of $x$ and $y$, and the result
+
+[**UNFINISHED**!!]
+
 \item Both classes should have validation methods that include a few appropriate tests
+
+[**UNFINISHED**!!]
+
 \item you will need to create an \texttt{initialize} function for each class, which will be used internally by \texttt{integrateIt}
+
+[**UNFINISHED**!!]
+
 \end{enumerate}
 
 
@@ -93,6 +119,9 @@ If we imagine carrying on that calculation many times between different points a
 \item \texttt{print} method 
 \begin{enumerate}
 \item A very simple print method for each class, which prints out just the integrated value (rather than all of the results)
+
+[**UNFINISHED**!!]
+
 \end{enumerate}
 
 \end{enumerate}
@@ -101,10 +130,25 @@ If we imagine carrying on that calculation many times between different points a
 \item Extra Credit: \texttt{tolTest} method
 \begin{enumerate}
 \item A \texttt{fun} (function)
+
+[**UNFINISHED**!!]
+
 \item A \texttt{tolerance} argument
+
+[**UNFINISHED**!!]
+
 \item A \texttt{rule} argument that indicates whether the Trapezoidal or Simpson's 
+
+[**UNFINISHED**!!]
+
 \item A \texttt{start} argument for the number of intervals it should start with
+
+[**UNFINISHED**!!]
+
 \item A \texttt{correct} argument that provides the correct answer for the integral
+
+[**UNFINISHED**!!]
+
 \end{enumerate}
 
 
@@ -112,12 +156,38 @@ If we imagine carrying on that calculation many times between different points a
 \texttt{tolTest} should take in a function and increase the number of intervals $n$ until the answer it provides using the specified approximation is within \texttt{tolerance} of the correct answer. Use \texttt{integrate()} to do this. \texttt{tolTest} output should be
 \begin{enumerate}
 \item The inputs
+
+[**UNFINISHED**!!]
+
 \item The final $n$
+
+[**UNFINISHED**!!]
+
 \item The absolute error of the estimate
+
+[**UNFINISHED**!!]
+
 \end{enumerate}
 \end{enumerate}
 
 
-
 \end{enumerate}
+
+
+
+
+**PURPOSE**: Documentation/Checklist.
+
+  * I will use this file as a checklist, though no actual work in R will be accomplished here.
+
+
+**Step 1**: Install `devtools` and create an S4 R Package named `integrateIt`.
+
+  * Use `integrateItDevelopmentFile.R` to set up directory and the package skeleton.
+
+  * **FINISHED**! I have loaded `devtools` and created the "bones" of the package `integrateIt`.
+
+
+**Step 2**: Create example data and documentation.
+
 
