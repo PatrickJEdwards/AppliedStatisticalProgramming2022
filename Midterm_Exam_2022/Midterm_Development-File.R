@@ -13,12 +13,37 @@ library(roxygen2)
 library(usethis)
 library(methods)
 
-# setwd("C:/Users/edwar/Documents/GitHub/AppliedStatisticalProgramming2022/Midterm_Exam_2022")
+setwd("C:/Users/edwar/Documents/GitHub/AppliedStatisticalProgramming2022/Midterm_Exam_2022")
 # Please change this to match your working directory.
 
 # Load necessary packages for `easyPois` package:
 usethis::use_package("methods")
 usethis::use_package("stats")
+
+# Set license (to pass check function):
+use_mit_license()
+
+## This code can be run as desired while the package is continually updated.
+current.code <- as.package("easyPois")
+devtools::load_all(current.code)
+document(current.code) # Run to fill/update `MAN` files.
+
+
+## Use `check` to check that package doesn't contain significant errors and
+## broadly meets CRAN standards:
+check("easyPois")
+
+# STILL NEED TO CHECK IF FUNCTION RUNS CORRECTLY!
+
+# Test function by trying it out:
+y <- rpois(5000,3)
+PoissonStatistic <- estimatePois(y, SEtype = "basic", B = 1000)
+
+
+
+
+
+
 
 
 # SETUP AND SANDBOX:
@@ -189,3 +214,6 @@ rm(testy, standardError)
 #use_r("estimatePois")
 
 
+
+# **Step 6**: Check that package works correctly.
+## Use Portion in the first section.
