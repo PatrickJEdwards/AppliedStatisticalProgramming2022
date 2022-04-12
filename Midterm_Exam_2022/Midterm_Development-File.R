@@ -108,7 +108,29 @@ rm(y,lambda,logLik)
 
 
 
-# **STEP 4**: Define the `standardError` function.
+# **STEP 4**: Define the `mle` function.
+
+# First, I create a sandbox version of the `mle` function and calculate the
+# maximum likelihood estimator for lambda. Then, I create the `mle.R` file
+# and fill it in with the function and example use.
+
+## Create `mle` function.
+mle <- function(y){
+  n <- length(y)
+  MLE <- sum(y)/n
+  return(MLE)
+}
+## Test `mle` function with toy data:
+ytest <- c(1:4,3,7:5,11)
+mle(y = ytest) # works fine
+rm(ytest,mle)
+
+## Create `mle.R` file in package:
+# use_r("mle")
+
+
+
+# **STEP 5**: Define the `standardError` function.
 
 # I first create the `standardError` function, then I test it using toy data.
 
@@ -161,7 +183,7 @@ rm(testy, standardError)
 
 
 
-# **Step 5**: Create `estimatePois` function that ties the package together:
+# **Step 6**: Create `estimatePois` function that ties the package together:
 
 # Create 'estimatePois.R' file:
 use_r("estimatePois")
