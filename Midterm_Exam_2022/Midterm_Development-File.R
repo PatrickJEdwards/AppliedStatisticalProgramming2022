@@ -67,3 +67,95 @@ use_r("PoisMLE")
 ## Within `PoisMLE.R`, also create `setValidity` and `setMethod` functions.
 
 
+
+# **STEP 3**: Define  logLik function.
+
+# First, I create and test the `logLik` function and test it with self-created
+# data. Second, I create the `logLik.R` file and fill it in with the function
+# and example data.
+
+# Create `logLik` function:
+logLik <- function(y, lambda){
+
+  # Extract the number of observations `n`:
+  n <- length(y)
+
+  # Create first term in equation:
+  term1 <- -n*lambda
+
+  # Create factorial of each value in `y`:
+  fac_y <- factorial(y)
+
+  # Create second term in equation:
+  term2 <- -sum(log(fac_y))
+
+  # Create third term in equation:
+  term3 <- log(lambda)*sum(y)
+
+  # Calculate log likelihood by combining the three terms.
+  LL <- term1 + term2 + term3
+
+  return(LL)
+}
+## Test with created data:
+y <- c(1:4,3,3,6,1,7:5,11,8,10)
+lambda <- 5
+logLik(y, lambda) # Works fine.
+rm(y,lambda,logLik)
+
+## Create R file for function `logLik` in package:
+# use_r("logLik")
+
+
+
+# **STEP 4**: Define the `standardError` function.
+
+# I first create the `standardError` function, then I test it using toy data.
+
+# Create sandbox 'standardError' function and test that it works.
+standardError <- function(y, SEtype, B = 100){
+
+  # Create 'basic' standardError function.
+  if(SEtype == "basic"){
+    # Use `mle` function already in package:
+    SE <- sqrt(mle(y)/length(y))
+    return(SE)
+  }
+  else if(SEtype == "bootstrap"){
+    n <- length(y)
+
+    # 1. Create 'B' samples from 'y' of size 'n':
+    samples <- replicate(
+      B,
+      sample(
+        y,
+        size = n,
+        replace = TRUE
+      )
+    )
+    # Output is an n by B matrix. Each column is a sample, with all samples
+    # being 'n' rows long.
+
+    # 2. Calculate the MLE for each sample:
+    MLE_vec <- apply(samples, 2, mle)
+    # Output is a vector of MLEs for each sample
+    # (i.e., columns of aforementioned matrix).
+
+    # 3. Find the standard deviation of 'mle_vec':
+    SE <- stats::sd(MLE_vec)
+
+    return(SE)
+  }
+  # Throw an error if neither works.
+  else{error("Invalid input for SEtype")}
+}
+# Test this function with toy data.
+testy <- rpois(2000,3)
+standardError(y = testy, SEtype = "basic", B = 50)
+standardError(y = testy, SEtype = "bootstrap", B = 500)
+
+rm(testy, standardError)
+
+## Create `standardError.R` file in package:
+#use_r("standardError")
+
