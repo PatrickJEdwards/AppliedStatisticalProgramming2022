@@ -1,0 +1,61 @@
+---
+title: "PS_5625_PS5_Function_Sandbox"
+author: "Patrick Edwards"
+date: "4/5/2022"
+output: pdf_document
+---
+
+# Preliminaries
+```{r}
+library(roxygen2)
+library(devtools)
+setwd("C:/Users/edwar/Documents/PS5625_PS5_TempFolder/integrateIt")
+```
+
+
+
+# Numerical Integration - Trapezoidal Rule.
+
+## Create test data.
+```{r}
+exampleFunction1 <- function(x) {
+  return(-x^2 + 50)
+}
+exampleFunction2 <- function(x) {
+  return(x^3 - x^2 - x + 50)
+}
+# 1. Create common vector of values:
+exampleX <- -10:10
+names(exampleX) <- "Example X Values"
+# 2. Create a vector of evaluated values
+example1Y <- exampleFunction1(exampleX)
+names(example1Y) <- "Example output Y from exampleX values put into exampleFunction1"
+example2Y <- exampleFunction2(exampleX)
+names(example2Y) <- "Example output Y from exampleX values put into exampleFunction2"
+# 3. Grab starting/ending values of x:
+exampleLimits <- c(as.numeric(head(exampleX,
+                                   1)
+                     ),
+          as.numeric(tail(exampleX,
+                          1)
+                     )
+          )
+names(exampleLimits) <- "The upper & lower bounds (a, b) of exampleX"
+```
+
+## Make Trapezoidal Rule Function.
+```{r}
+trapazoid <- function(x,f,limits,rule){
+  a <- limits[1] # Define starting value.
+  b <- limits[2] # Define ending value.
+  n <- length(x) # Define number of intervals.
+  
+  h <- (b - a)/n # define h.
+}
+?use_r()
+use_r("trapazoid")
+```
+
+
+
+# Numerical Integration - Simpson's Rule.
