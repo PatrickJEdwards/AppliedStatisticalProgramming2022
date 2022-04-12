@@ -159,3 +159,11 @@ rm(testy, standardError)
 ## Create `standardError.R` file in package:
 #use_r("standardError")
 
+
+
+# **Step 5**: Create `estimatePois` function that ties the package together:
+
+# Create 'estimatePois.R' file:
+use_r("estimatePois")
+
+
