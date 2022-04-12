@@ -186,6 +186,6 @@ rm(testy, standardError)
 # **Step 6**: Create `estimatePois` function that ties the package together:
 
 # Create 'estimatePois.R' file:
-use_r("estimatePois")
+#use_r("estimatePois")
 
 
