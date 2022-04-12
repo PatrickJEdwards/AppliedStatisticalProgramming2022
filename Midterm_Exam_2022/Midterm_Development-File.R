@@ -33,12 +33,12 @@ document(current.code) # Run to fill/update `MAN` files.
 ## broadly meets CRAN standards:
 check("easyPois")
 
-# STILL NEED TO CHECK IF FUNCTION RUNS CORRECTLY!
+## No errors, warnings, or notes left after running several iterations of 'check()'
 
 # Test function by trying it out:
 y <- rpois(5000,3)
 PoissonStatistic <- estimatePois(y, SEtype = "basic", B = 1000)
-
+PoissonStatistic
 
 
 
@@ -55,13 +55,13 @@ PoissonStatistic <- estimatePois(y, SEtype = "basic", B = 1000)
 
 # **STEP 1**: Create Package.
 
-# **NOTE**: If you plan to re-run the package creation process from here, then
-# you might want to move outside a Github repository. `devtools` struggles to
-# use the `create_packages` and other functions within Github repositories.
-# This is apparently because `devtools` thinks that the Github repository is
-# another active project, and therefore struggles to create another active
-# project for the package within the Github repository.
-# For more information, please check this `usethis` issue post:
+## **NOTE**: If you plan to re-run the package creation process from here, then
+## you might want to move outside a Github repository. `devtools` struggles to
+## use the `create_packages` and other functions within Github repositories.
+## This is apparently because `devtools` thinks that the Github repository is
+## another active project, and therefore struggles to create another active
+## project for the package within the Github repository.
+## For more information, please check this `usethis` issue post:
 usethislink <- "https://github.com/r-lib/usethis/issues/1020"
 
 # SET TO YOUR DIRECTORY:
