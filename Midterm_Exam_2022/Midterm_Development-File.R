@@ -33,16 +33,31 @@ document(current.code) # Run to fill/update `MAN` files.
 ## broadly meets CRAN standards:
 check("easyPois")
 
-## No errors, warnings, or notes left after running several iterations of 'check()'
+## No errors, warnings, or notes left after running several iterations of
+##'check()'
 
 # Test function by trying it out:
 y <- rpois(5000,3)
 PoissonStatistic <- estimatePois(y, SEtype = "basic", B = 1000)
 PoissonStatistic
 
+PoissonStatisticBootstrap <- estimatePois(y, SEtype = "bootstrap", B = 1000)
+PoissonStatisticBootstrap
 
+## SEtype 'bootstrap' output approximates 'basic' output, suggesting that both
+## are correct (or at least are similarly incorrect).
 
+# Within-package directory:
+setwd("C:/Users/edwar/Documents/GitHub/AppliedStatisticalProgramming2022/Midterm_Exam_2022/easyPois")
+# Please set in your own within-package directory.
 
+devtools::load_all() # Loads correctly.
+
+?estimatePois() # Help file looks correct.
+?logLik()
+?mle()
+?PoisMLE()
+?standardError()
 
 
 

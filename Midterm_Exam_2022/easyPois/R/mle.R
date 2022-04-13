@@ -9,7 +9,7 @@
 #' @author Patrick Edwards
 #' @examples
 #'
-#' ytest <- c(1:4,3,7:5,11)
+#' ytest <- rpois(2000,3)
 #' mle(y = ytest)
 #'
 #' @rdname mle

@@ -12,7 +12,7 @@
 #' @author Patrick Edwards
 #'
 #' @examples
-#' y <- rpois(500, 5)
+#' y <- rpois(2000,3)
 #' estPois <- estimatePois(y = y, SEtype = "basic")
 #' estPoisBootstrap <- estimatePois(y = y, SEtype = "bootstrap", B = 200)
 #'
