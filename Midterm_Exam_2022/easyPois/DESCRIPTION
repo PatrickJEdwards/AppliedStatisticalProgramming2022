@@ -1,10 +1,10 @@
 Package: easyPois
-Title: What the Package Does (One Line, Title Case)
+Title: Calculates Poisson-Related Statistics
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
+    person("Patrick", "Edwards", , "edwards.p@wustl.edu", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description: This package defines an S4 class representing a fitted model. Users provide observed data \code{y}, a standard errors calculation type \code{SEtype}, and an optional \code{bootstraps} option. In return, the package provides an S4-class object containing the original data, the maximum likelihood estimator, the log likelihood, the standard error for the MLE, and the type of standard error calculation used.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
