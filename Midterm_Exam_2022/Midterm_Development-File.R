@@ -104,3 +104,4 @@ estimatePois(y = c(1:10), SEtype = "bootstrap", B = 0)
 
 ## **Step 6**: Check that package works correctly.
 ### Use Portion in the first section.
+
