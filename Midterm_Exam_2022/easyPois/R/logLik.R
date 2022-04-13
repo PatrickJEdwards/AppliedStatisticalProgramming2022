@@ -1,5 +1,5 @@
 #' @name logLik
-#' @title Calculate logged likelihood
+#' @title Calculate Logged Likelihood (Poisson Distribution)
 #'
 #' @description Calculates logged likelihood of the observed data given a value of lambda
 #'

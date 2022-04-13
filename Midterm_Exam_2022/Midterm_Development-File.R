@@ -33,16 +33,16 @@ document(current.code) # Run to fill/update `MAN` files.
 ## broadly meets CRAN standards:
 check("easyPois")
 
-## No errors, warnings, or notes left after running several iterations of
-##'check()'
+## No errors, warnings, or notes left after running iterations of 'check()'
 
 # Test function by trying it out:
 y <- rpois(5000,3)
 PoissonStatistic <- estimatePois(y, SEtype = "basic", B = 1000)
 PoissonStatistic
-
 PoissonStatisticBootstrap <- estimatePois(y, SEtype = "bootstrap", B = 1000)
 PoissonStatisticBootstrap
+## SEtype 'bootstrap' output approximates 'basic' output, suggesting that both
+## are correct (or at least are similarly incorrect).
 
 # Use incorrect inputs. See if correct/informative errors are triggered:
 ## Negative y:
@@ -53,14 +53,14 @@ estimatePois(y = c(-100:-1), SEtype = "bootstrap", B = 1000) #Yes.
 estimatePois(y = c(1:5,NA,6:10), SEtype = "basic", B = 1000)
 estimatePois(y = c(1:5,NA,6:10), SEtype = "bootstrap", B = 1000)
 
-## SEtype 'bootstrap' output approximates 'basic' output, suggesting that both
-## are correct (or at least are similarly incorrect).
+# Empty y:
+estimatePois(y = c(), SEtype = "basic", B = 1000)
+estimatePois(y = c(), SEtype = "bootstrap", B = 1000)
 
-# Within-package directory:
-setwd("C:/Users/edwar/Documents/GitHub/AppliedStatisticalProgramming2022/Midterm_Exam_2022/easyPois")
-# Please set in your own within-package directory.
-
-devtools::load_all() # Loads correctly.
+# Incorrect `SEtype` & `B` inputs:
+estimatePois(y = c(1:10), SEtype = "garbage", B = 1000)
+estimatePois(y = c(1:10), SEtype = "basic", B = 0)
+estimatePois(y = c(1:10), SEtype = "bootstrap", B = 0)
 
 ?estimatePois() # Help file looks correct.
 ?logLik() # Help file looks correct.

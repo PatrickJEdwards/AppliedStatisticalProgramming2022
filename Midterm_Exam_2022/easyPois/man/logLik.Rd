@@ -2,7 +2,7 @@
 % Please edit documentation in R/logLik.R
 \name{logLik}
 \alias{logLik}
-\title{Calculate logged likelihood}
+\title{Calculate Logged Likelihood (Poisson Distribution)}
 \usage{
 logLik(y, lambda)
 }

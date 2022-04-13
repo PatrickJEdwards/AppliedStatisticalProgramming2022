@@ -24,6 +24,38 @@
 #'
 #' @export
 standardError <- function(y, SEtype, B = 100){
+  # Add redundant errors to trigger if something is wrong:
+  if(any(is.na(y))){
+    stop("ERROR! Observed data vector `y` cannot contain missing elements!")
+  }
+  if(any(is.infinite(y))){
+    stop("ERROR! Observed data vector `y` cannot be infinite!")
+  }
+  if(length(y) == 0){
+    stop("ERROR! observed data vector 'y' must have more than zero elements!")
+  }
+  if(any((y - floor(y)) != 0)){
+    stop("ERROR! Observed data vector `y` must be a non-negative integer!")
+  }
+  if(any(y < 0)){
+    stop("ERROR! Observed data vector 'y' cannot be negative!")
+  }
+  if(any(is.na(B))){
+    stop("ERROR! Number of samples `B` cannot contain missing elements!")
+  }
+  if(any(is.infinite(B))){
+    stop("ERROR! Number of samples `B` cannot be infinite!")
+  }
+  if(length(B) == 0){
+    stop("ERROR! Number of samples `B` must have more than zero elements!")
+  }
+  if(any((B - floor(B)) != 0)){
+    stop("ERROR! Number of samples `B` must be a non-negative integer!")
+  }
+  if(any(B < 1)){
+    stop("ERROR! Number of samples `B` cannot be non-positive (less than one)!")
+  }
+
 
   # Create 'basic' standardError function.
   if(SEtype == "basic"){
@@ -57,5 +89,5 @@ standardError <- function(y, SEtype, B = 100){
     return(SE)
   }
   # Throw an error if neither works.
-  else{stop("Invalid input for SEtype")}
+  else{stop('Invalid input for SEtype. Please input either "basic" or "bootstrap"')}
 }

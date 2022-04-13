@@ -2,7 +2,7 @@
 % Please edit documentation in R/estimatePois.R
 \name{estimatePois}
 \alias{estimatePois}
-\title{Estimate for a Poisson Distribution}
+\title{Estimate Relevant Statistics (Poisson Distribution)}
 \usage{
 estimatePois(y, SEtype = "bootstrap", B = 100)
 }
@@ -14,16 +14,16 @@ estimatePois(y, SEtype = "bootstrap", B = 100)
 \item{B}{Number of samples for \code{bootstrap} method. The default is 100 samples.}
 }
 \value{
-Object of class \code{PoisMLE}
+Object of class \code{PoisMLE}.
 }
 \description{
-Function that estimates and returns relevant statistics for a Poisson
-distribution from observed data.
+Function that estimates and returns relevant statistics for observed data that's presumably following a Poisson
+distribution.
 }
 \examples{
-y <- rpois(2000,3)
-estPois <- estimatePois(y = y, SEtype = "basic")
-estPoisBootstrap <- estimatePois(y = y, SEtype = "bootstrap", B = 200)
+testy <- rpois(2000,3)
+estPois <- estimatePois(y = testy, SEtype = "basic")
+estPoisBootstrap <- estimatePois(y = testy, SEtype = "bootstrap", B = 200)
 
 }
 \author{

@@ -3,7 +3,7 @@
 \docType{class}
 \name{PoisMLE}
 \alias{PoisMLE}
-\title{Generate Class \code{PoisMLE} Object from Poisson-Distributed Data}
+\title{Generate Objects with Class \code{PoisMLE} (Poisson Distribution)}
 \description{
 Object of class \code{PoisMLE} as created by the \code{PoisMLE} function. An object of class \code{PoisMLE} has these slots:
 }

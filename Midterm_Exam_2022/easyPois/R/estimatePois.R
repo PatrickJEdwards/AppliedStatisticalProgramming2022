@@ -1,20 +1,20 @@
 #' @name estimatePois
-#' @title Estimate for a Poisson Distribution
+#' @title Estimate Relevant Statistics (Poisson Distribution)
 #'
-#' @description Function that estimates and returns relevant statistics for a Poisson
-#' distribution from observed data.
+#' @description Function that estimates and returns relevant statistics for observed data that's presumably following a Poisson
+#' distribution.
 #'
 #' @param y Original data; vector of non-negative integers.
 #' @param SEtype Tells \code{standardError} function to use the \code{basic} or \code{bootstrap} method for calculating the standard error. \code{standardError} defaults to \code{bootstrap}.
 #' @param B Number of samples for \code{bootstrap} method. The default is 100 samples.
-#' @return Object of class \code{PoisMLE}
+#' @return Object of class \code{PoisMLE}.
 #'
 #' @author Patrick Edwards
 #'
 #' @examples
-#' y <- rpois(2000,3)
-#' estPois <- estimatePois(y = y, SEtype = "basic")
-#' estPoisBootstrap <- estimatePois(y = y, SEtype = "bootstrap", B = 200)
+#' testy <- rpois(2000,3)
+#' estPois <- estimatePois(y = testy, SEtype = "basic")
+#' estPoisBootstrap <- estimatePois(y = testy, SEtype = "bootstrap", B = 200)
 #'
 #' @rdname estimatePois
 #' @export

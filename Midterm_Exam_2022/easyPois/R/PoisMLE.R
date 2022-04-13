@@ -1,5 +1,5 @@
 #' @name PoisMLE
-#' @title Generate Class `PoisMLE` Object from Poisson-Distributed Data
+#' @title Generate Objects with Class `PoisMLE` (Poisson Distribution)
 #'
 #' @description Object of class \code{PoisMLE} as created by the \code{PoisMLE} function. An object of class `PoisMLE` has these slots:
 #'

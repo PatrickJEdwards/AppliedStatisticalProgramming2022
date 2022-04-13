@@ -2,7 +2,7 @@
 % Please edit documentation in R/mle.R
 \name{mle}
 \alias{mle}
-\title{Calculate the maximum likelihood estimator}
+\title{Calculate Maximum Likelihood Estimator (Poisson Distribution)}
 \usage{
 mle(y)
 }
@@ -13,7 +13,7 @@ mle(y)
 Object \code{MLE} containing the calculated maximum likelihood estimator.
 }
 \description{
-Calculates the maximum likelihood estimator for lambda given observed data.
+Calculates the Poisson maximum likelihood estimator for lambda given observed data.
 }
 \examples{
 
