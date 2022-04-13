@@ -3,9 +3,9 @@
 \docType{class}
 \name{PoisMLE}
 \alias{PoisMLE}
-\title{Create Poisson MLE S4 Class Generator Function}
+\title{Generate Class \code{PoisMLE} Object from Poisson-Distributed Data}
 \description{
-Object of class \code{PoisMLE} as created by the \code{PoisMLE} function. An object of class \code{PoisMLE} has the following slots:
+Object of class \code{PoisMLE} as created by the \code{PoisMLE} function. An object of class \code{PoisMLE} has these slots:
 }
 \section{Slots}{
 

@@ -19,7 +19,7 @@ Calculates logged likelihood of the observed data given a value of lambda
 }
 \examples{
 
-ytest <- c(1:4,3,7:5,11)
+ytest <- rpois(2000,3)
 logLik(y = ytest, lambda = 5)
 
 }

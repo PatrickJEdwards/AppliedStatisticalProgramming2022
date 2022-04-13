@@ -17,7 +17,7 @@ Calculates the maximum likelihood estimator for lambda given observed data.
 }
 \examples{
 
-ytest <- c(1:4,3,7:5,11)
+ytest <- rpois(2000,3)
 mle(y = ytest)
 
 }

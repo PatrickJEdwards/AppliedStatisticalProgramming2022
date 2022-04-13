@@ -21,7 +21,7 @@ Function that estimates and returns relevant statistics for a Poisson
 distribution from observed data.
 }
 \examples{
-y <- rpois(500, 5)
+y <- rpois(2000,3)
 estPois <- estimatePois(y = y, SEtype = "basic")
 estPoisBootstrap <- estimatePois(y = y, SEtype = "bootstrap", B = 200)
 

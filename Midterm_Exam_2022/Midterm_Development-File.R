@@ -44,6 +44,15 @@ PoissonStatistic
 PoissonStatisticBootstrap <- estimatePois(y, SEtype = "bootstrap", B = 1000)
 PoissonStatisticBootstrap
 
+# Use incorrect inputs. See if correct/informative errors are triggered:
+## Negative y:
+estimatePois(y = c(-100:-1), SEtype = "basic", B = 1000) #Yes.
+estimatePois(y = c(-100:-1), SEtype = "bootstrap", B = 1000) #Yes.
+
+# NA y:
+estimatePois(y = c(1:5,NA,6:10), SEtype = "basic", B = 1000)
+estimatePois(y = c(1:5,NA,6:10), SEtype = "bootstrap", B = 1000)
+
 ## SEtype 'bootstrap' output approximates 'basic' output, suggesting that both
 ## are correct (or at least are similarly incorrect).
 
@@ -54,10 +63,10 @@ setwd("C:/Users/edwar/Documents/GitHub/AppliedStatisticalProgramming2022/Midterm
 devtools::load_all() # Loads correctly.
 
 ?estimatePois() # Help file looks correct.
-?logLik()
-?mle()
-?PoisMLE()
-?standardError()
+?logLik() # Help file looks correct.
+?mle() # Help file looks correct.
+?PoisMLE() # Help file looks correct.
+?standardError() # Help file looks correct.
 
 
 

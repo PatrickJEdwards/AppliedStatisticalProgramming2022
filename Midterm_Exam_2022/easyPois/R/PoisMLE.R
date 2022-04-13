@@ -1,7 +1,7 @@
 #' @name PoisMLE
-#' @title Create Poisson MLE S4 Class Generator Function
+#' @title Generate Class `PoisMLE` Object from Poisson-Distributed Data
 #'
-#' @description Object of class \code{PoisMLE} as created by the \code{PoisMLE} function. An object of class `PoisMLE` has the following slots:
+#' @description Object of class \code{PoisMLE} as created by the \code{PoisMLE} function. An object of class `PoisMLE` has these slots:
 #'
 #' @slot y Original data; vector of non-negative integers.
 #' @slot MLE The maximum likelihood estimator.

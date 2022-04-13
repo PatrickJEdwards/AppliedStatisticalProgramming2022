@@ -19,6 +19,15 @@ mle <- function(y){
   n <- length(y)
   MLE <- sum(y)/n
   # Add redundant errors to trigger if something is wrong:
+  if(any(is.na(object@y))){
+    stop("ERROR! Observed data vector `y` cannot contain missing elements!")
+  }
+  if(any(is.infinite(object@y))){
+    stop("ERROR! Observed data vector `y` cannot be infinite!")
+  }
+  if(any((object@y - floor(object@y)) != 0)){
+    stop("ERROR! Observed data vector `y` must be a non-negative integer!")
+  }
   if(any(y < 0)){
     stop("ERROR! Observed data vector 'y' cannot be negative")
   }
