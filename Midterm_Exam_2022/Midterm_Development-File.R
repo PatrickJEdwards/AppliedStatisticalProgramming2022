@@ -13,64 +13,42 @@ library(roxygen2)
 library(usethis)
 library(methods)
 
-setwd("C:/Users/edwar/Documents/GitHub/AppliedStatisticalProgramming2022/Midterm_Exam_2022")
-# Please change this to match your working directory.
+## Please change this to match your working directory.
+# setwd()
 
-# Load necessary packages for `easyPois` package:
-usethis::use_package("methods")
-usethis::use_package("stats")
-
-# Set license (to pass check function):
-use_mit_license()
-
-## This code can be run as desired while the package is continually updated.
+## This code can be run as many times as desired.
 current.code <- as.package("easyPois")
 devtools::load_all(current.code)
 document(current.code) # Run to fill/update `MAN` files.
 
 
-## Use `check` to check that package doesn't contain significant errors and
-## broadly meets CRAN standards:
+## Run to see if package meets CRAN minimal standards:
 check("easyPois")
 
-## No errors, warnings, or notes left after running iterations of 'check()'
-
-# Test function by trying it out:
+## Test package by trying main `estimatePois` function out:
 y <- rpois(5000,3)
-PoissonStatistic <- estimatePois(y, SEtype = "basic", B = 1000)
-PoissonStatistic
-PoissonStatisticBootstrap <- estimatePois(y, SEtype = "bootstrap", B = 1000)
-PoissonStatisticBootstrap
-## SEtype 'bootstrap' output approximates 'basic' output, suggesting that both
-## are correct (or at least are similarly incorrect).
+estimatePois(y, SEtype = "basic", B = 1000)
+estimatePois(y, SEtype = "bootstrap", B = 1000)
 
-# Use incorrect inputs. See if correct/informative errors are triggered:
-## Negative y:
+
+## Check if functions trigger correct errors:
+## negative y:
 estimatePois(y = c(-100:-1), SEtype = "basic", B = 1000) #Yes.
 estimatePois(y = c(-100:-1), SEtype = "bootstrap", B = 1000) #Yes.
-
-# NA y:
+## NA y:
 estimatePois(y = c(1:5,NA,6:10), SEtype = "basic", B = 1000)
 estimatePois(y = c(1:5,NA,6:10), SEtype = "bootstrap", B = 1000)
-
 # Empty y:
 estimatePois(y = c(), SEtype = "basic", B = 1000)
 estimatePois(y = c(), SEtype = "bootstrap", B = 1000)
-
 # Incorrect `SEtype` & `B` inputs:
 estimatePois(y = c(1:10), SEtype = "garbage", B = 1000)
 estimatePois(y = c(1:10), SEtype = "basic", B = 0)
 estimatePois(y = c(1:10), SEtype = "bootstrap", B = 0)
 
-?estimatePois() # Help file looks correct.
-?logLik() # Help file looks correct.
-?mle() # Help file looks correct.
-?PoisMLE() # Help file looks correct.
-?standardError() # Help file looks correct.
 
 
-
-# SETUP AND SANDBOX:
+# SECTION 2: Outline of package setup Steps
 # This section documents my progress in creating the package.
 # Including steps for each function where I create a toy version of the,
 # function, test it with toy data, then create the actual '.R' file.
@@ -105,6 +83,13 @@ setwd("C:/Users/edwar/Documents/PS5625_Midterm_Temp_Folder/easyPois")
 
 # (Optional) Create Git repository:
 ## use_git()
+
+# Load necessary packages for `easyPois` package:
+usethis::use_package("methods")
+usethis::use_package("stats")
+
+# Set license (to pass check function):
+use_mit_license()
 
 
 
