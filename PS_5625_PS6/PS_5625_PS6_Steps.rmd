@@ -1,0 +1,188 @@
+---
+title: 'PS 5625 PS #6 Development File'
+author: "Patrick Edwards"
+date: "5/7/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, tidy = TRUE)
+```
+
+PRELIMINARY: Load package `Rcpp`:
+```{r}
+#install.packages("Rcpp")
+library(Rcpp)
+```
+
+# PRELIMINARY: Start with assumption that all models are weighted equally.
+
+## R code.
+```{r eval = FALSE}
+## Find number of models:
+K <- dim(df)[2] - 1
+
+## Find the number of observations (in this case, presidential elections):
+T <- dim(df)[1]
+
+## Define w_hat with all models weighted equally.
+w_hat <- replicate(K,1/K)
+```
+
+## Rcpp Code (is this necessary?)
+
+**[NOT DONE]**
+
+
+# STEP (1): Write an Rcpp function that will calculate the answer to Equation (2). The output will be a matrix.
+
+## Corresponding R Code (From in-class assignment)
+```{r eval = FALSE}
+z_hat <- (w_hat * dnorm(y[t], df[t,k], 1))/(sum(w_hat * dnorm(y[t], df[t,k], 1)))
+```
+
+## Rcpp Code
+
+**NOTE**: this is largely from `Rcpp` code that my group created for in-class assignment #21.
+
+```{r}
+library(Rcpp)
+
+# Deriving Eq. 2:
+
+cppFunction('
+  NumericMatrix cpp_Eq2(
+    NumericMatrix x,
+    NumericVector y,
+    NumericVector weights,
+    double sd
+    ){
+      int rows = x.nrow();
+      
+    }
+  
+')
+```
+
+
+# STEP (2): Write an Rcpp function that will calculate the answer to Equation (3). The output will be a vector.
+
+## Corresponding R Code (From in-class assignment)
+
+```{r eval = FALSE}
+## NOTE 1: input `z_hat` and output `w_hat` are vectors of `K` elements.
+## NOTE 2: `T = dim(df)[1]`, or the number of all presidential elections in sample.
+w_hat <- sum(z_hat)/T
+```
+
+## Rcpp Code
+
+**[NOT DONE]**
+
+
+# STEP (3): Write an Rcpp function that will complete the entire algorithm.
+
+## Corresponding R Code (From in-class assignment)
+
+```{r eval = FALSE}
+# PRELIMINARY 1: Number of models:
+K <- dim(df)[2] - 1
+
+# PRELIMINARY 2: Number of observations:
+Ti <- dim(df)[1]
+
+# PRELIMINARY 3: Create function that combines steps (2) & (3):
+steps23 <- function(df = df, w_hat = wHat_it[i-1,]){
+  y <- df[[7]] # Create vector of outcome variables.
+  M <- df[,1:K] # create matrix of models.
+  K <- dim(df)[2] - 1 # Number of models.
+  Ti <- dim(df)[1] #Number of observations
+  # Create dnorm object for step 2:
+  dnormal <- t(
+    sapply(
+      X = 1:Ti,
+      FUN = function(t){
+        dnorm(
+          y[t],
+          sapply(
+            X = 1:K,
+            FUN = function(k){df[t,k]}
+            ),
+          sd = 1
+          )
+        }
+      )
+    )
+  # Do step 2 function:
+  z_hats <- t(
+    sapply(
+      X = 1:Ti,
+      FUN = function(t){
+        (w_hat * dnormal[t,])/(sum(w_hat * dnormal[t,]))
+        }
+      )
+    )
+  # Do step 3 function:
+  w_hat2 <- sapply(
+    X = 1:K,
+    FUN = function(k){
+      sum(z_hats[,k])/Ti
+    }
+  )
+  return(w_hat2)
+}
+
+# PRELIMINARY 4: create matrix to collect iterations data. It needs to have 21
+# rows for the initial w_hat and the 20 iterations of w_hat.
+itnum <- 20 # Number of iterations
+wHat_it <- matrix(
+  data = NA,
+  nrow = itnum + 1,
+  ncol = K
+  )
+colnames(wHat_it) <- c("Campbell",
+                       "Lewis-Beck",
+                       "EWT2C2",
+                       "Fair",
+                       "Hibbs",
+                       "Abramowitz"
+                       )
+rownames(wHat_it) <- 0:itnum
+
+# STEP 1: Define w_hat with all models weighted equally.
+wHat_it[1,] <- replicate(K,1/K)
+
+# Steps 2-4 (ITERATION):
+i <- 2 
+while(i <= itnum + 1){
+  wHat_it[i,] <- steps23(df = df, w_hat = wHat_it[i-1,])
+  print(i)
+  i = i + 1
+}
+
+# FINAL ITERATION:
+wHat_it[tail(itnum,1),]
+```
+
+## Rcpp Code
+
+**[NOT DONE]**
+
+
+# STEP (4): Include one unit test per function.
+
+**[STEP NOT COMPLETE]**
+
+
+# STEP (5): Assemble the code as an R package.
+
+**[STEP NOT COMPLETE]**
+
+
+# STEP (6): Write a development .R file that demonstrates the package’s use.
+
+**[STEP NOT COMPLETE]**
+
+
+
+
