@@ -11,7 +11,7 @@
 #'
 #' @export
 CPP_EBMA <- function(x, y, W_Hats, sd, tol) {
-    .Call(`_rcppEBMA_CPP_EBMA`, x, y, W_Hats, sd, tol)
+    .Call(`_rcppEBMA3_CPP_EBMA`, x, y, W_Hats, sd, tol)
 }
 
 #' W-Hat/Reweighting Computation.
@@ -23,7 +23,7 @@ CPP_EBMA <- function(x, y, W_Hats, sd, tol) {
 NULL
 
 W_H <- function(Z_H) {
-    .Call(`_rcppEBMA_W_H`, Z_H)
+    .Call(`_rcppEBMA3_W_H`, Z_H)
 }
 
 #' Z-Hat/Computation: Predicting Z Values.
@@ -37,10 +37,10 @@ W_H <- function(Z_H) {
 NULL
 
 Z_H <- function(x, y, W_H, sd) {
-    .Call(`_rcppEBMA_Z_H`, x, y, W_H, sd)
+    .Call(`_rcppEBMA3_Z_H`, x, y, W_H, sd)
 }
 
 rcpp_hello_world <- function() {
-    .Call(`_rcppEBMA_rcpp_hello_world`)
+    .Call(`_rcppEBMA3_rcpp_hello_world`)
 }
 

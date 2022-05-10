@@ -14,7 +14,7 @@ library(usethis)
 library(methods)
 
 ## Please change this to match your working directory.
-# setwd()
+setwd("C:/Users/edwar/Documents/GitHub/AppliedStatisticalProgramming2022/Midterm_Exam_2022/easyPois")
 
 ## This code can be run as many times as desired.
 current.code <- as.package("easyPois")
