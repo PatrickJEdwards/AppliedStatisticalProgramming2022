@@ -11,9 +11,9 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 
+NumericVector W_H(NumericMatrix Z_H){
 
 // Reweighting function, similar to what was done on our in-class assignment.
-NumericVector W_H(NumericMatrix Z_H){
   
   // Derive object for # of Z_hat rows:
   int rows = Z_H.nrow();

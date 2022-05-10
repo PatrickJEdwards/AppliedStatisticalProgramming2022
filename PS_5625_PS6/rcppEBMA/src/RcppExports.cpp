@@ -11,7 +11,7 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // CPP_EBMA
-// Please note that this function is loosely based off the thre  NumericVector CPP_EBMA(NumericMatrix x, NumericVector y, NumericVector W_Hats, double sd, double tol);
+NumericVector CPP_EBMA(NumericMatrix x, NumericVector y, NumericVector W_Hats, double sd, double tol);
 RcppExport SEXP _rcppEBMA_CPP_EBMA(SEXP xSEXP, SEXP ySEXP, SEXP W_HatsSEXP, SEXP sdSEXP, SEXP tolSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -26,7 +26,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // W_H
-// Reweighting function, similar to what was done on our in-class assignment. NumericVector W_H(NumericMatrix Z_H);
+NumericVector W_H(NumericMatrix Z_H);
 RcppExport SEXP _rcppEBMA_W_H(SEXP Z_HSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

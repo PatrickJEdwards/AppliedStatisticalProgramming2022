@@ -10,8 +10,6 @@
 #' @param tol Tolerance threshold after which iteration ends.
 #'
 #' @export
-NULL
-
 CPP_EBMA <- function(x, y, W_Hats, sd, tol) {
     .Call(`_rcppEBMA_CPP_EBMA`, x, y, W_Hats, sd, tol)
 }

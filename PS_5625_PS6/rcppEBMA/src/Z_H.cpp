@@ -13,7 +13,6 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 
-
 NumericMatrix Z_H(NumericMatrix x, NumericVector y, NumericVector W_H, double sd){
   
   // Start here, creates initial variables as well as normal matrices
