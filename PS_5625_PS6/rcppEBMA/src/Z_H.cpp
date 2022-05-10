@@ -1,13 +1,18 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+
+// [[Rcpp::export]]
+
+
 NumericMatrix Z_H(NumericMatrix x, 
                   NumericVector y, 
                   NumericVector weights, 
                   double sd
 ){
   
-  //Start here
+  //Start here, creates matrices
+  //Code based on inclass assingment
   int rows = x.nrow();
   NumericMatrix dNormal(x);
   NumericMatrix out(x);
@@ -15,19 +20,27 @@ NumericMatrix Z_H(NumericMatrix x,
   //Calculates dnorm like for the R portion of inclass21:
   for (int l = 0; l < x.nrow(); ++l) {
     for (int k = 0; k < x.ncol(); ++k) {
-      double datNumber = R::dnorm(y[l], x(l,k), sd, FALSE);
-      dNormal(l,k) =  datNumber; // 
+      double dnorm_v = R::dnorm(
+        y[l], 
+         x(l,k), 
+         sd, 
+         FALSE
+      );
+      dNormal(l,k) =  dnorm_v; // 
     }
   }
   
   //weights rows before the summation. 
-  //(Parallels the summation in the denominator in equation)
+  //Parallels the summation in the denominator in equation
   NumericVector val(rows);
   for (int l = 0; l < rows; ++l) {
     
     double rs = 0;
     for (int k = 0; k < dNormal.ncol(); ++k) {
-      rs += weights[k] * dNormal(l,k);
+      rs += weights[k] * dNormal(
+        l,
+        k
+      );
     }
     val[l] = rs;
   }
@@ -40,9 +53,8 @@ NumericMatrix Z_H(NumericMatrix x,
     }
   }
   
-  // Equivalent to return() in R.
+  // Equivalent to return() in R. Returns matrix of z-hats
   return out;
 }
 
 
-// [[Rcpp::export]]
