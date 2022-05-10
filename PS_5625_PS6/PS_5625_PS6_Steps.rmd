@@ -50,11 +50,13 @@ z_hat <- (w_hat * dnorm(y[t], df[t,k], 1))/(sum(w_hat * dnorm(y[t], df[t,k], 1))
 
 ```{r rcppVersion}
 library(Rcpp)
+library(RcppArmadillo)
 # Code for Equation 2:
 ## NOTE: I base this code on in-class assignment #21. Our group created the cpp code that solved step (1) & step(2)
 
-cppFunction(
-  'NumericMatrix Z_H(NumericMatrix x, 
+
+cppFunction('
+  NumericMatrix Z_H(NumericMatrix x, 
     NumericVector y, 
     NumericVector weights, 
     double sd
@@ -115,19 +117,34 @@ w_hat <- sum(z_hat)/T
 # Input includes Z_H output.
 
 
-cppFunction('NumericVector rCppStep3(NumericMatrix Z_H) {
-  int rows = zHat.nrow();
-  int cols = zHat.ncol();
-  NumericVector out(cols);
-  
-  for (int l = 0; l < zHat.ncol(); ++l) {
-  
-    double newWeight = 0;
-    for (int k = 0; k < zHat.nrow(); ++k) {
-      newWeight +=  zHat(k,l);
+cppFunction('NumericMatrix W_H(NumericMatrix x, NumericVector y, NumericVector weights, double sd){
+  int rows = x.nrow();
+  NumericMatrix dNormal(x);
+  NumericMatrix out(x);
+
+  for (int i = 0; i < x.nrow(); ++i) {
+    for (int j = 0; j < x.ncol(); ++j) {
+      double datNumber = R::dnorm(y[i], x(i,j), sd, FALSE);
+      dNormal(i,j) =  datNumber; // 
     }
-  out[l] = newWeight / rows;
   }
+
+  NumericVector sums(rows);
+  for (int i = 0; i < rows; ++i) {
+  
+    double rowSum = 0;
+    for (int j = 0; j < dNormal.ncol(); ++j) {
+      rowSum += weights[j] * dNormal(i,j);
+    }
+  sums[i] = rowSum;
+  }
+  
+  for (int i = 0; i < x.nrow(); ++i) {
+    for (int j = 0; j < x.ncol(); ++j) {
+      out(i,j) =  weights[j] * dNormal(i,j) / sums[i]; // 
+    }
+  }
+
   return out;
 }')
 ```
@@ -220,7 +237,75 @@ wHat_it[tail(itnum,1),]
 
 ## Rcpp Code
 
-**[NOT DONE]**
+```{r rcppVersion}
+# ALso loosly based on in-class assignment.
+
+src <- "#include <Rcpp.h>
+using namespace Rcpp;
+// [[Rcpp::export]]
+
+NumericMatrix W_H(NumericMatrix x, NumericVector y, NumericVector weights, double sd){
+  int rows = x.nrow();
+  NumericMatrix dNormal(x);
+  NumericMatrix out(x);
+
+  for (int i = 0; i < x.nrow(); ++i) {
+    for (int j = 0; j < x.ncol(); ++j) {
+      double datNumber = R::dnorm(y[i], x(i,j), sd, FALSE);
+      dNormal(i,j) =  datNumber; // 
+    }
+  }
+
+  NumericVector sums(rows);
+  for (int i = 0; i < rows; ++i) {
+  
+    double rowSum = 0;
+    for (int j = 0; j < dNormal.ncol(); ++j) {
+      rowSum += weights[j] * dNormal(i,j);
+    }
+  sums[i] = rowSum;
+  }
+  
+  for (int i = 0; i < x.nrow(); ++i) {
+    for (int j = 0; j < x.ncol(); ++j) {
+      out(i,j) =  weights[j] * dNormal(i,j) / sums[i]; // 
+    }
+  }
+
+  return out;
+}
+
+// [[Rcpp::export]]
+NumericVector W_H(NumericMatrix zHat) {
+  int rows = zHat.nrow();
+  int cols = zHat.ncol();
+  NumericVector out(cols);
+  
+  for (int j = 0; j < zHat.ncol(); ++j) {
+  
+    double newWeight = 0;
+    for (int i = 0; i < zHat.nrow(); ++i) {
+      newWeight +=  zHat(i,j);
+    }
+  out[j] = newWeight / rows;
+  }
+  return out;
+}
+
+// [[Rcpp::export]]
+NumericVector rCppEBMA(NumericMatrix x, NumericVector y, NumericVector weights, double sd, int iterations){
+NumericMatrix w((iterations + 1), x.ncol());
+w( 0 , _ ) = weights;
+
+for (int i = 0; i < iterations; ++i){
+  w((i + 1), _ ) = W_H(W_H(x, y, w(i, _ ), sd));
+}
+
+return w( iterations , _ );
+}"
+
+```
+
 
 
 # STEP (4): Include one unit test per function.
@@ -230,7 +315,16 @@ wHat_it[tail(itnum,1),]
 
 # STEP (5): Assemble the code as an R package.
 
-**[STEP NOT COMPLETE]**
+```{r}
+getwd()
+setwd("~/")
+library(usethis)
+usethis::use_rcpp("C:/Users/edwar/Documents/LouisRcppEBMA")
+# Create outside of github repository, then put it back in later.
+#setwd("Documents")
+#library(usethis)
+#usethis::use_rcpp("RcppEBMA")
+```
 
 
 # STEP (6): Write a development .R file that demonstrates the package’s use.
