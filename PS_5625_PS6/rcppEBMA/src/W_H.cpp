@@ -2,54 +2,42 @@
 using namespace Rcpp;
 
 
-NumericMatrix W_H(
-    NumericMatrix x, 
-    NumericVector y, 
-    NumericVector weights, 
-    double sd
-  ){
-  int rows = x.nrow();
-  NumericMatrix dNormal(x);
-  NumericMatrix out(x);
-  
-  for (
-      int i = 0; 
-      i < x.nrow(); 
-      ++i
-        ) {
-    for (
-        int j = 0; 
-        j < x.ncol(); 
-        ++j
-          ) {
-      double datNumber = R::dnorm(
-        y[i], 
-        x(i,j),
-        sd, 
-        FALSE);
-      dNormal(i,j) =  datNumber; // 
-    }
-  }
-  
-  NumericVector sums(rows);
-  for (int i = 0; i < rows; ++i) {
-    
-    double rowSum = 0;
-    for (int j = 0; j < dNormal.ncol(); ++j) {
-      rowSum += weights[j] * dNormal(i,j);
-    }
-    sums[i] = rowSum;
-  }
-  
-  for (int i = 0; i < x.nrow(); ++i) {
-    for (int j = 0; j < x.ncol(); ++j) {
-      out(i,j) =  weights[j] * dNormal(i,j) / sums[i]; // 
-    }
-  }
-  
-  return out;
-}
+//' W-Hat/Reweighting Computation.
+//'
+//'
+//' @param Z_H Numeric matrix of z-hat values, derived in Z_H function
+//'
+//' @export
 
 
 // [[Rcpp::export]]
+
+// Reweighting function, similar to what was done on our in-class assignment.
+NumericVector W_H(NumericMatrix Z_H){
+  
+  // Derive object for # of Z_hat rows:
+  int rows = Z_H.nrow();
+  
+  // Derive object for # of Z_hat columns:
+  int cols = Z_H.ncol();
+  NumericVector out(cols);
+  
+  // Reweighting function. Code based on W-hat calculations done 
+  //  for inclass assignment #21.
+  for (int k = 0; k < Z_H.ncol(); ++k) {
+    
+    double nWeight = 0;
+    
+    // Inner for-loop sums the z-hats column-wise:
+    for (int i = 0; i < Z_H.nrow(); ++i) {
+      nWeight +=  Z_H(i,k);
+    }
+    
+    //Column-wise sum of Z-hats are divided by the # of Z-hat rows.
+    weight_out[k] = nWeight / rows;
+  }
+  
+  // Returns new weights:
+  return weight_out;
+}
 

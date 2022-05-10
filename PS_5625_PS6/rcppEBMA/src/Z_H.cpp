@@ -2,12 +2,21 @@
 using namespace Rcpp;
 
 
+//' Z-Hat/Computation: Predicting Z Values.
+//'
+//' @param x Numeric matrix of model predictions.
+//' @param y Vector of actual (observed) outcomes for each observation.
+//' @param W_H Vector of weights with each element corresponding to a model.
+//' @param sd Standard deviation.
+//'
+//' @export
+
 // [[Rcpp::export]]
 
 
 NumericMatrix Z_H(NumericMatrix x, 
                   NumericVector y, 
-                  NumericVector weights, 
+                  NumericVector W_H, 
                   double sd
 ){
   
@@ -37,7 +46,7 @@ NumericMatrix Z_H(NumericMatrix x,
     
     double rs = 0;
     for (int k = 0; k < dNormal.ncol(); ++k) {
-      rs += weights[k] * dNormal(
+      rs += W_H[k] * dNormal(
         l,
         k
       );
@@ -49,7 +58,7 @@ NumericMatrix Z_H(NumericMatrix x,
   // Calculates Z_H value.
   for (int l = 0; l < x.nrow(); ++l) {
     for (int k = 0; k < x.ncol(); ++k) {
-      out(l,k) =  weights[k] * dNormal(l,k) / val[l]; // 
+      out(l,k) =  W_H[k] * dNormal(l,k) / val[l]; // 
     }
   }
   
