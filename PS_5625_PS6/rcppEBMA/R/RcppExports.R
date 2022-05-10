@@ -10,11 +10,13 @@
 #' @param tol Tolerance threshold after which iteration ends.
 #'
 #' @export
+NULL
+
 CPP_EBMA <- function(x, y, W_Hats, sd, tol) {
     .Call(`_rcppEBMA_CPP_EBMA`, x, y, W_Hats, sd, tol)
 }
 
-#' W-Hat/Reweighting Computation.
+#' W-Hat Re-weighting Computation.
 #'
 #'
 #' @param Z_H Numeric matrix of z-hat values, derived in Z_H function

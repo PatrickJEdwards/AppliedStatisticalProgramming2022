@@ -2,15 +2,15 @@
 using namespace Rcpp;
 
 
-//' W-Hat/Reweighting Computation.
+//' W-Hat Re-weighting Computation.
 //'
 //'
 //' @param Z_H Numeric matrix of z-hat values, derived in Z_H function
 //'
 //' @export
 
-
 // [[Rcpp::export]]
+
 
 // Reweighting function, similar to what was done on our in-class assignment.
 NumericVector W_H(NumericMatrix Z_H){
@@ -40,4 +40,3 @@ NumericVector W_H(NumericMatrix Z_H){
   // Returns new weights:
   return weight_out;
 }
-

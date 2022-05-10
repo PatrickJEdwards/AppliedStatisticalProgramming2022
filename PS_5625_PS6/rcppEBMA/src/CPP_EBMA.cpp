@@ -1,4 +1,6 @@
 #include <Rcpp.h>
+#include "Z_H.h"
+#include "W_H.h"
 using namespace Rcpp;
 
 //' EBMA Calculation Using C++
@@ -10,17 +12,12 @@ using namespace Rcpp;
 //' @param tol Tolerance threshold after which iteration ends.
 //'
 //' @export
+
 // [[Rcpp::export]]
 
 // Please note that this function is loosely based off the thre
 
-NumericVector CPP_EBMA(
-    NumericMatrix x, 
-    NumericVector y, 
-    NumericVector W_Hats, 
-    double sd, 
-    double tol
-  ){
+NumericVector CPP_EBMA(NumericMatrix x, NumericVector y, NumericVector W_Hats, double sd, double tol){
   
   // If tolerance parameter is met, then the iteration does not run.
   bool threshold = FALSE;
@@ -29,12 +26,7 @@ NumericVector CPP_EBMA(
   // Derive Z-hats as well as updated weights W-hats:
   while(threshold == FALSE){
     
-    NumericMatrix C_Z_H = Z_H(
-      x, 
-      y, 
-      W_Hats, 
-      sd
-    );
+    NumericMatrix C_Z_H = Z_H(x, y, W_Hats, sd);
     
     NumericVector nWeights = W_H(C_Z_H);
     
@@ -47,11 +39,9 @@ NumericVector CPP_EBMA(
     if(is_true(all(diff))){
       threshold = TRUE;
     }
-    
     else{
       W_Hats = nWeights;
     }
-    
     iterations = iterations + 1;
   
   }

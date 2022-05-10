@@ -5,14 +5,40 @@ library(devtools)
 library(roxygen2)
 
 example(source) # defines the sourceDir() function
-roxygen2::roxygenize()
+roxygen2::roxygenize("rcppEBMAtest")
 
 
 workDir <- "C:/Users/edwar/Documents/TestFile"
+funcDir <- "~/1. Washington University in St. Louis/5. Spring 2022 Semester/Pol Sci 5625 Applied Statistical Programming/rcppEBMA/"
+
+setwd(workDir)
+getwd()
+
+
+Rcpp.package.skeleton(
+  name = "rcppEBMAtest",
+  cpp_files = c(
+    paste(funcDir, "Z_H.h", sep = ""),
+    paste(funcDir, "CPP_EBMA.cpp", sep = ""),
+    paste(funcDir, "W_H.cpp", sep = ""),
+    paste(funcDir, "Z_H.h", sep = ""),
+    paste(funcDir, "Z_H.cpp", sep = ""),
+    paste(funcDir, "Z_H.h", sep = "")
+  ),
+  author = "Patrick Edwards",
+  email = "edwards.p@wustl.edu"
+)
+
+
+setwd("C:/Users/edwar/Documents/TestFile")
+Rcpp::compileAttributes("rcppEBMAtest")
 
 
 
-create.pack
+current.code <- as.package("rcppEBMAtest")
+Rcpp::compileAttributes(pkgdir = paste(workDir, "rcppEBMA3", sep = ""))
+devtools::load_all(current.code)
+document(current.code) # Run to fill/update `MAN` files.
 
 
 
@@ -23,7 +49,7 @@ create.pack
 
 # SET TO YOUR OWN WORKING DIRECTORY
 setwd("~/GitHub/AppliedStatisticalProgramming2022/PS_5625_PS6/rcppEBMA3")
-workDir <- getwd()
+getwd()
 workDir <- paste(workDir, "/", sep = "")
 
 
