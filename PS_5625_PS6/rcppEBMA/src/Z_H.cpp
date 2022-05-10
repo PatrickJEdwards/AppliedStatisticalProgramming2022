@@ -20,15 +20,16 @@ NumericMatrix Z_H(NumericMatrix x,
     }
   }
   
-  //weights rows before the summation.
+  //weights rows before the summation. 
+  //(Parallels the summation in the denominator in equation)
   NumericVector val(rows);
   for (int l = 0; l < rows; ++l) {
     
-    double rowSum = 0;
+    double rs = 0;
     for (int k = 0; k < dNormal.ncol(); ++k) {
-      rowSum += weights[k] * dNormal(l,k);
+      rs += weights[k] * dNormal(l,k);
     }
-    val[l] = rowSum;
+    val[l] = rs;
   }
   
   
