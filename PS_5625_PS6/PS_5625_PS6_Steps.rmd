@@ -17,6 +17,14 @@ library(Rcpp)
 
 # PRELIMINARY: Start with assumption that all models are weighted equally.
 
+## Load in test data.
+```{r}
+library(EBMAforecast)
+df <- EBMAforecast::presidentialForecast
+y <- df$Actual
+```
+
+
 ## R code.
 ```{r eval = FALSE}
 ## Find number of models:
@@ -29,11 +37,6 @@ T <- dim(df)[1]
 w_hat <- replicate(K,1/K)
 ```
 
-## Rcpp Code (is this necessary?)
-
-**[NOT DONE]**
-
-
 # STEP (1): Write an Rcpp function that will calculate the answer to Equation (2). The output will be a matrix.
 
 ## Corresponding R Code (From in-class assignment)
@@ -45,23 +48,53 @@ z_hat <- (w_hat * dnorm(y[t], df[t,k], 1))/(sum(w_hat * dnorm(y[t], df[t,k], 1))
 
 **NOTE**: this is largely from `Rcpp` code that my group created for in-class assignment #21.
 
-```{r}
+```{r rcppVersion}
 library(Rcpp)
+# Code for Equation 2:
+## NOTE: I base this code on in-class assignment #21. Our group created the cpp code that solved step (1) & step(2)
 
-# Deriving Eq. 2:
-
-cppFunction('
-  NumericMatrix cpp_Eq2(
-    NumericMatrix x,
-    NumericVector y,
-    NumericVector weights,
+cppFunction(
+  'NumericMatrix Z_H(NumericMatrix x, 
+    NumericVector y, 
+    NumericVector weights, 
     double sd
-    ){
-      int rows = x.nrow();
-      
-    }
+  ){
   
-')
+  //Start here
+  int rows = x.nrow();
+  NumericMatrix dNormal(x);
+  NumericMatrix out(x);
+  
+  //Calculates dnorm like for the R portion of inclass21:
+  for (int l = 0; l < x.nrow(); ++l) {
+    for (int k = 0; k < x.ncol(); ++k) {
+      double datNumber = R::dnorm(y[l], x(l,k), sd, FALSE);
+      dNormal(l,k) =  datNumber; // 
+    }
+  }
+  
+  //weights rows before the summation.
+  NumericVector val(rows);
+  for (int l = 0; l < rows; ++l) {
+  
+    double rowSum = 0;
+    for (int k = 0; k < dNormal.ncol(); ++k) {
+      rowSum += weights[k] * dNormal(l,k);
+    }
+  val[l] = rowSum;
+  }
+  
+  
+  // Calculates Z_H value.
+  for (int l = 0; l < x.nrow(); ++l) {
+    for (int k = 0; k < x.ncol(); ++k) {
+      out(l,k) =  weights[k] * dNormal(l,k) / val[l]; // 
+    }
+  }
+  
+  // Equivalent to return() in R.
+  return out;
+}')
 ```
 
 
@@ -77,7 +110,28 @@ w_hat <- sum(z_hat)/T
 
 ## Rcpp Code
 
-**[NOT DONE]**
+```{r rcppVersion}
+## NOTE: I base this code on in-class assignment #21. Our group created the cpp code that solved step(2)
+# Input includes Z_H output.
+
+
+cppFunction('NumericVector rCppStep3(NumericMatrix Z_H) {
+  int rows = zHat.nrow();
+  int cols = zHat.ncol();
+  NumericVector out(cols);
+  
+  for (int l = 0; l < zHat.ncol(); ++l) {
+  
+    double newWeight = 0;
+    for (int k = 0; k < zHat.nrow(); ++k) {
+      newWeight +=  zHat(k,l);
+    }
+  out[l] = newWeight / rows;
+  }
+  return out;
+}')
+```
+
 
 
 # STEP (3): Write an Rcpp function that will complete the entire algorithm.
