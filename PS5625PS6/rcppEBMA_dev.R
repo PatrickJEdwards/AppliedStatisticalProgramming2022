@@ -28,7 +28,7 @@ N <- dim(df)[1] # Num. of observations (rows)
 initialwHats <- replicate(K,1/K)
 
 # Test Z-hat function:
-zhatTest <- ZH(
+zhatTest <- Z_H(
   x = x,
   y = y,
   w = initialwHats, 
@@ -86,13 +86,6 @@ document(current.code) # Run to fill/update `MAN` files.
 
 current.code <- as.package("rcppEBMA")
 devtools::load_all(current.code)
-
-# Fill documentation
-
-
-
-# Load functions from package:
-load_all("rcppEBMA")
 
 # Check documentation files:
 ?rcppEBMA
