@@ -25,13 +25,13 @@ K <- dim(df)[2] - 1 # Num. of Models (columns of x)
 N <- dim(df)[1] # Num. of observations (rows)
 
 # Initial weights (assumed equal predictive power):
-w_hat <- replicate(K,1/K)
+initialwHats <- replicate(K,1/K)
 
 # Test Z-hat function:
 zhatTest <- Z_H(
   x = x,
   y = y,
-  W_H = w_hat, 
+  W_H = initialwHats, 
   sd = 1
 )
 
@@ -39,12 +39,12 @@ zhatTest <- Z_H(
 whatTest <- W_H(Z_H = zhatTest)
 
 # Test whole EBMA function:
-CPP_EBMA_Test <- CPP_EBMA(
+CPP_EBMAtest <- CPP_EBMA(
   x = x,
   y = y,
-  W_Hats = w_hat,
+  W_Hat = initialwHats,
   sd = 1,
-  tol = 0.0
+  tol = 0.0001
 )
 
 

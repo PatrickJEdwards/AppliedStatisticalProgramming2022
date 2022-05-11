@@ -5,13 +5,13 @@
 #'
 #' @param x Numeric matrix of  predictions from each model.
 #' @param y Numeric vector of actual (observed) outcomes.
-#' @param W_Hats Numeric vector of the weight assigned to each model.
+#' @param W_Hat Numeric vector of the weight assigned to each model.
 #' @param sd Standard deviation.
 #' @param tol Tolerance threshold after which iteration ends.
 #'
 #' @export
-CPP_EBMA <- function(x, y, W_Hats, sd, tol) {
-    .Call(`_rcppEBMA_CPP_EBMA`, x, y, W_Hats, sd, tol)
+CPP_EBMA <- function(x, y, W_Hat, sd, tol) {
+    .Call(`_rcppEBMA_CPP_EBMA`, x, y, W_Hat, sd, tol)
 }
 
 #' W-Hat Re-weighting Computation.

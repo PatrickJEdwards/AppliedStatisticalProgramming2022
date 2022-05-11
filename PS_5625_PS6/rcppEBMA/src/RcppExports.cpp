@@ -11,17 +11,17 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // CPP_EBMA
-NumericVector CPP_EBMA(NumericMatrix x, NumericVector y, NumericVector W_Hats, double sd, double tol);
-RcppExport SEXP _rcppEBMA_CPP_EBMA(SEXP xSEXP, SEXP ySEXP, SEXP W_HatsSEXP, SEXP sdSEXP, SEXP tolSEXP) {
+NumericVector CPP_EBMA(NumericMatrix x, NumericVector y, NumericVector W_Hat, double sd, double tol);
+RcppExport SEXP _rcppEBMA_CPP_EBMA(SEXP xSEXP, SEXP ySEXP, SEXP W_HatSEXP, SEXP sdSEXP, SEXP tolSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type W_Hats(W_HatsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type W_Hat(W_HatSEXP);
     Rcpp::traits::input_parameter< double >::type sd(sdSEXP);
     Rcpp::traits::input_parameter< double >::type tol(tolSEXP);
-    rcpp_result_gen = Rcpp::wrap(CPP_EBMA(x, y, W_Hats, sd, tol));
+    rcpp_result_gen = Rcpp::wrap(CPP_EBMA(x, y, W_Hat, sd, tol));
     return rcpp_result_gen;
 END_RCPP
 }

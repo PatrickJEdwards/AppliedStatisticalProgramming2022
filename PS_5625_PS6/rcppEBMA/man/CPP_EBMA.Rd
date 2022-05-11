@@ -4,14 +4,14 @@
 \alias{CPP_EBMA}
 \title{EBMA Calculation Using C++}
 \usage{
-CPP_EBMA(x, y, W_Hats, sd, tol)
+CPP_EBMA(x, y, W_Hat, sd, tol)
 }
 \arguments{
 \item{x}{Numeric matrix of  predictions from each model.}
 
 \item{y}{Numeric vector of actual (observed) outcomes.}
 
-\item{W_Hats}{Numeric vector of the weight assigned to each model.}
+\item{W_Hat}{Numeric vector of the weight assigned to each model.}
 
 \item{sd}{Standard deviation.}
 
