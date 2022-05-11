@@ -4,11 +4,9 @@ using namespace Rcpp;
 
 //' W-Hat Re-weighting Computation.
 //'
-//'
 //' @param Z_H Numeric matrix of z-hat values, derived in Z_H function
 //'
 //' @export
-
 // [[Rcpp::export]]
 
 NumericVector W_H(NumericMatrix Z_H){
@@ -32,11 +30,9 @@ NumericVector W_H(NumericMatrix Z_H){
     for (int i = 0; i < Z_H.nrow(); ++i) {
       nWeight +=  Z_H(i,k);
     }
-    
     //Column-wise sum of Z-hats are divided by the # of Z-hat rows.
-    weight_out[k] = nWeight / rows;
+    out[k] = nWeight / rows;
   }
-  
   // Returns new weights:
-  return weight_out;
+  return out;
 }

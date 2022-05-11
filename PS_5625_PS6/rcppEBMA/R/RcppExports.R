@@ -16,17 +16,14 @@ CPP_EBMA <- function(x, y, W_Hats, sd, tol) {
 
 #' W-Hat Re-weighting Computation.
 #'
-#'
 #' @param Z_H Numeric matrix of z-hat values, derived in Z_H function
 #'
 #' @export
-NULL
-
 W_H <- function(Z_H) {
     .Call(`_rcppEBMA_W_H`, Z_H)
 }
 
-#' Z-Hat/Computation: Predicting Z Values.
+#' Z-Hat Computation.
 #'
 #' @param x Numeric matrix of model predictions.
 #' @param y Vector of actual (observed) outcomes for each observation.
@@ -34,8 +31,6 @@ W_H <- function(Z_H) {
 #' @param sd Standard deviation.
 #'
 #' @export
-NULL
-
 Z_H <- function(x, y, W_H, sd) {
     .Call(`_rcppEBMA_Z_H`, x, y, W_H, sd)
 }

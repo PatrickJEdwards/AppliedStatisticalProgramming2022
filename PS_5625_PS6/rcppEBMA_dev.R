@@ -39,22 +39,8 @@ getwd()
 current.code <- as.package("rcppEBMA")
 devtools::load_all(current.code)
 
+# Fill documentation
 document(current.code) # Run to fill/update `MAN` files.
-
-Rcpp::compileAttributes(
-  pkgdir = "rcppEBMA"
-)
-
-
-?Rcpp.package.skeleton()
-
-# Update to automatically complete documentation:
-compileAttributes(
-  pkgdir = "rcppEBMA",
-  verbose = getOption("verbose")
-)
-
-#?compileAttributes()
 
 
 # Load functions from package:

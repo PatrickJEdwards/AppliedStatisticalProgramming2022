@@ -1,12 +1,14 @@
 Package: rcppEBMA
 Type: Package
-Title: What the Package Does in One 'Title Case' Line
+Title: Perform the Expectation-Maximization Algorithm
 Version: 1.0
 Date: 2022-05-10
-Author: Your Name
-Maintainer: Your Name <your@email.com>
-Description: One paragraph description of what the
-      package does as one or more full sentences.
+Author: Patrick Edwards
+Maintainer: Patrick Edwards <edwardspatrick94@gmail.com>
+Description: This package implements an 'ensemble of models'.  It calculates
+      the probability that observation `t` is best predicted by model `k`, then
+      estimates the weights assigned to each model. It repeats this until a 
+      threshold is reached.
 License: GPL (>= 2)
 Imports: Rcpp (>= 1.0.8)
 LinkingTo: Rcpp

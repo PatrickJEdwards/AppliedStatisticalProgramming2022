@@ -32,7 +32,7 @@ NumericVector CPP_EBMA(NumericMatrix x, NumericVector y, NumericVector W_Hats, d
     // TRUE if all elements in weights object fall below tol threshold.
     // If TRUE, then ends the iterated process and prints the total number of iterations
     
-    LogicalVector diff = (abs((W_Hats - nWeights)) < tolerance);
+    LogicalVector diff = (abs((W_Hats - nWeights)) < tol);
     
     if(is_true(all(diff))){
       thresh = TRUE;

@@ -2,7 +2,7 @@
 using namespace Rcpp;
 
 
-//' Z-Hat/Computation: Predicting Z Values.
+//' Z-Hat Computation.
 //'
 //' @param x Numeric matrix of model predictions.
 //' @param y Vector of actual (observed) outcomes for each observation.
@@ -10,7 +10,6 @@ using namespace Rcpp;
 //' @param sd Standard deviation.
 //'
 //' @export
-
 // [[Rcpp::export]]
 
 NumericMatrix Z_H(NumericMatrix x, NumericVector y, NumericVector W_H, double sd){
