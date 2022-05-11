@@ -26,27 +26,27 @@ BEGIN_RCPP
 END_RCPP
 }
 // W_H
-NumericVector W_H(NumericMatrix Z_H);
-RcppExport SEXP _rcppEBMA_W_H(SEXP Z_HSEXP) {
+NumericVector W_H(NumericMatrix z);
+RcppExport SEXP _rcppEBMA_W_H(SEXP zSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type Z_H(Z_HSEXP);
-    rcpp_result_gen = Rcpp::wrap(W_H(Z_H));
+    Rcpp::traits::input_parameter< NumericMatrix >::type z(zSEXP);
+    rcpp_result_gen = Rcpp::wrap(W_H(z));
     return rcpp_result_gen;
 END_RCPP
 }
 // Z_H
-NumericMatrix Z_H(NumericMatrix x, NumericVector y, NumericVector W_H, double sd);
-RcppExport SEXP _rcppEBMA_Z_H(SEXP xSEXP, SEXP ySEXP, SEXP W_HSEXP, SEXP sdSEXP) {
+NumericMatrix Z_H(NumericMatrix x, NumericVector y, NumericVector w, double sd);
+RcppExport SEXP _rcppEBMA_Z_H(SEXP xSEXP, SEXP ySEXP, SEXP wSEXP, SEXP sdSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type W_H(W_HSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type w(wSEXP);
     Rcpp::traits::input_parameter< double >::type sd(sdSEXP);
-    rcpp_result_gen = Rcpp::wrap(Z_H(x, y, W_H, sd));
+    rcpp_result_gen = Rcpp::wrap(Z_H(x, y, w, sd));
     return rcpp_result_gen;
 END_RCPP
 }

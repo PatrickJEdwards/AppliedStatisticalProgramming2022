@@ -1,6 +1,6 @@
 #include <Rcpp.h>
-#include "Z_H.h"
-#include "W_H.h"
+#include "ZH.h"
+#include "WH.h"
 using namespace Rcpp;
 
 //' EBMA Calculation Using C++
@@ -12,7 +12,9 @@ using namespace Rcpp;
 //' @param tol Tolerance threshold after which iteration ends.
 //'
 //' @export
+
 // [[Rcpp::export]]
+
 NumericVector CPP_EBMA(NumericMatrix x, NumericVector y, NumericVector W_Hat, double sd, double tol){
   
   // If tolerance parameter is met, then the iteration does not run.

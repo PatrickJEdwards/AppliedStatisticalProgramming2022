@@ -4,14 +4,14 @@
 \alias{Z_H}
 \title{Z-Hat Computation.}
 \usage{
-Z_H(x, y, W_H, sd)
+Z_H(x, y, w, sd)
 }
 \arguments{
 \item{x}{Numeric matrix of model predictions.}
 
 \item{y}{Vector of actual (observed) outcomes for each observation.}
 
-\item{W_H}{Vector of weights with each element corresponding to a model.}
+\item{w}{Vector of weights with each element corresponding to a model.}
 
 \item{sd}{Standard deviation.}
 }

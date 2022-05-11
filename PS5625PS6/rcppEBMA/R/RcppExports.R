@@ -10,29 +10,31 @@
 #' @param tol Tolerance threshold after which iteration ends.
 #'
 #' @export
+NULL
+
 CPP_EBMA <- function(x, y, W_Hat, sd, tol) {
     .Call(`_rcppEBMA_CPP_EBMA`, x, y, W_Hat, sd, tol)
 }
 
 #' W-Hat Re-weighting Computation.
 #'
-#' @param Z_H Numeric matrix of z-hat values, derived in Z_H function
+#' @param z Numeric matrix of z-hat values, derived in Z hat function
 #'
 #' @export
-W_H <- function(Z_H) {
-    .Call(`_rcppEBMA_W_H`, Z_H)
+W_H <- function(z) {
+    .Call(`_rcppEBMA_W_H`, z)
 }
 
 #' Z-Hat Computation.
 #'
 #' @param x Numeric matrix of model predictions.
 #' @param y Vector of actual (observed) outcomes for each observation.
-#' @param W_H Vector of weights with each element corresponding to a model.
+#' @param w Vector of weights with each element corresponding to a model.
 #' @param sd Standard deviation.
 #'
 #' @export
-Z_H <- function(x, y, W_H, sd) {
-    .Call(`_rcppEBMA_Z_H`, x, y, W_H, sd)
+Z_H <- function(x, y, w, sd) {
+    .Call(`_rcppEBMA_Z_H`, x, y, w, sd)
 }
 
 rcpp_hello_world <- function() {

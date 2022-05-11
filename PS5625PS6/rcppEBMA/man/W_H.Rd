@@ -4,10 +4,10 @@
 \alias{W_H}
 \title{W-Hat Re-weighting Computation.}
 \usage{
-W_H(Z_H)
+W_H(z)
 }
 \arguments{
-\item{Z_H}{Numeric matrix of z-hat values, derived in Z_H function}
+\item{z}{Numeric matrix of z-hat values, derived in Z hat function}
 }
 \description{
 W-Hat Re-weighting Computation.
